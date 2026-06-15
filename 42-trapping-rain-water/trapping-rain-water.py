@@ -5,27 +5,22 @@ class Solution:
         n = len(height)
         if n == 0:
             return 0
-            
-        # Initialize lists with zeros to avoid IndexError
-        prefixmax = [0] * n
-        suffixmax = [0] * n
-        
-        # Fill prefix maximums
-        prefixmax[0] = height[0]
-        for i in range(1, n):
-            prefixmax[i] = max(prefixmax[i-1], height[i])
-            
-        # Fill suffix maximums
-        suffixmax[n-1] = height[n-1]
-        for i in range(n-2, -1, -1):
-            suffixmax[i] = max(suffixmax[i+1], height[i])
 
-        total = 0
-        for i in range(n):
-            leftmax = prefixmax[i]
-            rightmax = suffixmax[i]
+        left = 0
+        right = n-1
 
-            # Simplified logic: every bar traps water up to the min boundary
-            total += min(leftmax, rightmax) - height[i]
-            
+        total =leftmax=rightmax=0
+        while(left<=right):
+            if(height[left]<=height[right]):
+                if(leftmax>height[left]):
+                    total+=leftmax - height[left]
+                else:
+                    leftmax = height[left]
+                left+=1
+            else:
+                if(rightmax>height[right]):
+                    total+=rightmax - height[right]
+                else:
+                    rightmax = height[right]
+                right-=1
         return total
