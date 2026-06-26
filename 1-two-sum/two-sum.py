@@ -10,4 +10,4 @@ class Solution:
             
             seen[num] = index
             
-        return [] # Fallback
+        return []
