@@ -18,5 +18,4 @@ class Solution:
                     return False
             else:
                 map_stop[y] = x
-        print(map_ptos)
         return True
