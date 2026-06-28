@@ -1,21 +1,11 @@
+from collections import Counter
+
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        rn = {}
-        for i in ransomNote:
-            if i in rn:
-                rn[i] +=1
-            else:
-                rn[i] = 1
- 
-        mag = {}
-        for j in magazine:
-            if j in mag:
-                mag[j] += 1
-            else:
-                mag[j] = 1
+        rn = Counter(ransomNote)
+        mag = Counter(magazine)
 
-        for key,val in rn.items():
-            if key not in mag or val > mag[key]:
+        for key, val in rn.items():
+            if mag[key] < val: # Counter returns 0 automatically if key is missing
                 return False
-        
         return True
